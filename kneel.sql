@@ -28,22 +28,27 @@ CREATE TABLE `Sizes`(
     `price` NUMERIC(6,2) NOT NULL
 );
 
-CREATE TABLE `CUSTORDER`(
+CREATE TABLE `CUSTORDER` (
     `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     `metal_id` INTEGER NOT NULL,
-    FOREIGN KEY(`metal_id`) REFERENCES `Metals`(`id`),
     `carats_id` INTEGER NOT NULL,  
-    FOREIGN KEY(`carats_id`) REFERENCES `Sizes`(`id`),
     `style_id` INTEGER NOT NULL,
-    FOREIGN KEY(`style_id`) REFERENCES `Styles`(`id`),
-    `price` NUMERIC NOT NULL
+    `price` NUMERIC NOT NULL,
+    FOREIGN KEY (`metal_id`) REFERENCES `Metals` (`id`),
+    FOREIGN KEY (`carats_id`) REFERENCES `Sizes` (`id`),
+    FOREIGN KEY (`style_id`) REFERENCES `Styles` (`id`)
 );
 
-INSERT INTO `Metals` VALUES (null, 'Gold', 500.00)
-INSERT INTO `Metals` VALUES (null, 'Silver', 450.00)
 
-INSERT INTO `Sizes` VALUES (null, 24, 400.00)
-INSERT INTO `Sizes` VALUES (null, 24, 400.00)
 
-INSERT INTO `Styles` VALUES (null, 'Dainty', 200.00)
-INSERT INTO `Styles` VALUES (null, 'Regal', 250.00)
+INSERT INTO `Metals` VALUES (null, 'Gold', 500.00);
+INSERT INTO `Metals` VALUES (null, 'Silver', 450.00);
+
+INSERT INTO `Sizes` VALUES (null, 24, 400.00);
+INSERT INTO `Sizes` VALUES (null, 30, 450.00);
+
+INSERT INTO `Styles` VALUES (null, 'Dainty', 200.00);
+INSERT INTO `Styles` VALUES (null, 'Regal', 250.00);
+
+INSERT INTO `CUSTORDER` VALUES (null, 2, 1, 1, 1050.00);
+INSERT INTO `CUSTORDER` VALUES (null, 1, 2, 1, 1050.00);
