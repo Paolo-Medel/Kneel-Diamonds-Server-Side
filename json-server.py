@@ -1,12 +1,9 @@
-#FIRST: copy over the nss_handler 
 import json
 from http.server import HTTPServer
 from nss_handler import HandleRequests, status
-#SECOND: create the views
 from views import list_metals, list_sizes, list_styles, list_orders, retrieve_style, retrieve_size, retrieve_metal, retrieve_orders, delete_order, insert_order, expand_order_by_id, expand_order
 
-#THIRD: Build out the json-server
-#FOURTH: expand orders 
+
 class JSONServer(HandleRequests):
     """Server class to handle incoming HTTP requests for shipping ships"""
 
@@ -39,12 +36,7 @@ class JSONServer(HandleRequests):
 
             response_body = list_styles()
             return self.response(response_body, status.HTTP_200_SUCCESS.value)
-# the function below needs to change. I want:
-# When a customer searches orders, for all of them to come
-# When a customer searches for a specific order, for it to come
-# When a customer wants to expands all orders, it comes
-# When a customer wants to expand a specific order, it happens
-# How do I write the cleanest conditionals for that to happen?
+
         elif url["requested_resource"] == "orders":
             if url["pk"] != 0:
                 if "_expand" in url["query_params"]:
@@ -100,9 +92,6 @@ class JSONServer(HandleRequests):
         else:
             return self.response("METHOD NOT ALLOWED", status.HTTP_405_METHOD_NOT_ALLOWED.value)
 
-
-
-
 def main():
     host = ''
     port = 8000
@@ -110,5 +99,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-## still need to expand everything on orders
